@@ -1,6 +1,6 @@
 from enum import Enum
 from point import Point
-from piece import Piece
+from piece import Piece, PieceType
 
 
 class MoveType(Enum):
@@ -80,7 +80,7 @@ class Move:
             if point_4.less() or point_4.greater():
                 return False
         else:
-            piece_name = self._piece.piece_tye.name
+            piece_name = self._piece.piece_type.name
             if move_name == "move_w":
                 rotation_movement = self.__anti_clockwise_movement + 1
             else:
@@ -122,7 +122,7 @@ class Move:
             self._piece.update_point_3(point_3 + move['all'])
             self._piece.update_point_4(point_4 + move['all'])
         else:
-            piece_name = self._piece.piece_tye.name
+            piece_name = self._piece.piece_type.name
             if move_name == "move_w":
                 rotation_movement = self.__anti_clockwise_movement
             else:
@@ -135,3 +135,22 @@ class Move:
 
     def get_piece(self):
         return self._piece
+
+
+def test_is_valid_piece_move():
+    move_1 = Move(Piece(PieceType.piece_1), Point(0, 1), Point(0, 13), Point(13, 1), Point(13, 13))
+    assert move_1.is_valid_piece_move(MoveType.move_d) is True
+    assert move_1.is_valid_piece_move(MoveType.move_w) is False
+    move_1.move_piece(MoveType.move_a)
+    assert move_1.get_piece().point_1.x == 4
+    assert move_1.get_piece().point_1.y == 2
+    assert move_1.get_piece().point_2.x == 5
+    assert move_1.get_piece().point_3.x == 6
+    assert move_1.get_piece().point_4.x == 7
+    move_1.move_piece(MoveType.move_s)
+    assert move_1.get_piece().point_1.y == 3
+    assert move_1.get_piece().point_2.x == 4
+    assert move_1.get_piece().point_3.y == 5
+    assert move_1.get_piece().point_4.y == 6
+
+

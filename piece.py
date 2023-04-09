@@ -36,7 +36,7 @@ class Piece:
         return self._point_4
 
     @property
-    def piece_tye(self):
+    def piece_type(self):
         return self._piece_type
 
     def update_point_1(self, point):
@@ -52,5 +52,15 @@ class Piece:
         self._point_4 = point
 
 
-if __name__ == "__main__":
-    first_piece = Piece(PieceType.piece_1)
+def test_piece():
+    piece = Piece(PieceType.piece_1)
+    assert piece.point_1.x == 5
+    assert piece.point_1.y == 1
+    assert piece.point_2.x == 6
+    assert piece.point_3.x == 7
+    assert piece.point_4.x == 8
+    assert piece.piece_type.name == 'piece_1'
+    piece.update_point_1(Point(10, 8))
+    assert piece.point_1.x == 10
+    assert piece.point_1.y == 8
+

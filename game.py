@@ -81,6 +81,16 @@ class Game:
         return False
 
 
+def test_update_new_position():
+    test_game = Game(12, 12)
+    test_piece = test_game.update_new_position(Piece(PieceType.piece_1), 7)
+    assert test_piece.point_1.x == 7
+    assert test_piece.point_1.y == 1
+    assert test_piece.point_2.x == 8
+    assert test_piece.point_3.x == 9
+    assert test_piece.point_4.x == 10
+
+
 if __name__ == "__main__":
     game = Game(12, 12)
     random_piece_type = randint(1, 5)
