@@ -23,4 +23,4 @@ move.py - It has code about 5 moves (a, d, w, s and " ") of pieces and methods r
 
 game.py - It combines the code of piece and move and form a game
 
-(Note:- Unit tests are added for piece, move and game. To run Unit test, run command "pytest <name of file>")
+(Note:- Unit tests are added for piece, move and game. To run Unit test, run command "pytest (name of file)")
