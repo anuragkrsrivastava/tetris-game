@@ -3,9 +3,11 @@ from point import Point
 from piece import Piece, PieceType
 
 
+# Different types of moves and movement of all points of pieces
 class MoveType(Enum):
     move_a = {'all': Point(-1, 1)}
     move_d = {'all': Point(1, 1)}
+    # anticlockwise movement
     move_w = {'piece_1': {1: {'point_2': Point(-1, -1), 'point_3': Point(-2, -2), 'point_4': Point(-3, -3)},
                           2: {'point_2': Point(-1, 1), 'point_3': Point(-2, 2), 'point_4': Point(-3, 3)},
                           3: {'point_2': Point(1, 1), 'point_3': Point(2, 2), 'point_4': Point(3, 3)},
@@ -26,6 +28,7 @@ class MoveType(Enum):
                           2: {'point_2': Point(-1, -1), 'point_3': Point(-1, 1), 'point_4': Point(-2, 0)},
                           3: {'point_2': Point(-1, 1), 'point_3': Point(1, 1), 'point_4': Point(0, 2)},
                           0: {'point_2': Point(1, 1), 'point_3': Point(1, -1), 'point_4': Point(2, 0)}}}
+    # clockwise movement
     move_s = {'piece_1': {1: {'point_2': Point(-1, 1), 'point_3': Point(-2, 2), 'point_4': Point(-3, 3)},
                           2: {'point_2': Point(-1, -1), 'point_3': Point(-2, -2), 'point_4': Point(-3, -3)},
                           3: {'point_2': Point(1, -1), 'point_3': Point(2, -2), 'point_4': Point(3, -3)},
@@ -59,6 +62,7 @@ class Move:
         self.__clockwise_movement = 0
         self.__anti_clockwise_movement = 0
 
+    # Checking whether move is valid or not
     def is_valid_piece_move(self, move_type):
         move = move_type.value
         move_name = move_type.name
@@ -106,6 +110,7 @@ class Move:
                 self.__clockwise_movement %= 4
         return True
 
+    # updating position of piece. If move is valid
     def move_piece(self, move_type):
         if not self.is_valid_piece_move(move_type):
             print("Please Select some other move, .. this is not a valid move .......\n")
@@ -137,7 +142,8 @@ class Move:
         return self._piece
 
 
-def test_is_valid_piece_move():
+# Unit test cases for move
+def test_move():
     move_1 = Move(Piece(PieceType.piece_1), Point(0, 1), Point(0, 13), Point(13, 1), Point(13, 13))
     assert move_1.is_valid_piece_move(MoveType.move_d) is True
     assert move_1.is_valid_piece_move(MoveType.move_w) is False

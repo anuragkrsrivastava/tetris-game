@@ -2,6 +2,7 @@ from enum import Enum
 from point import Point
 
 
+# Different type of pieces and position of pieces
 class PieceType(Enum):
     piece_1 = {'point_1': Point(5, 1), 'point_2': Point(6, 1), 'point_3': Point(7, 1), 'point_4': Point(8, 1)}
     piece_2 = {'point_1': Point(6, 1), 'point_2': Point(6, 2), 'point_3': Point(6, 3), 'point_4': Point(7, 3)}
@@ -52,6 +53,7 @@ class Piece:
         self._point_4 = point
 
 
+# Unit test cases for piece
 def test_piece():
     piece = Piece(PieceType.piece_1)
     assert piece.point_1.x == 5

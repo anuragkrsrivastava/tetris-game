@@ -3,6 +3,7 @@ class Point:
         self.x = x
         self.y = y
 
+    # add dunder
     def __add__(self, other_point):
         x = self.x + other_point.x
         y = self.y + other_point.y

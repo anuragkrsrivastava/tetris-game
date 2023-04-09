@@ -13,6 +13,7 @@ class Game:
         self._board_right_up = Point(board_right_up, 1)
         self._board_right_down = Point(board_right_up, board_right_down)
 
+    # update position of second piece which randomly positioned along x-axis
     @staticmethod
     def update_new_position(piece, new_position):
         point_1 = piece.point_1
@@ -31,6 +32,7 @@ class Game:
         piece.update_point_1(Point(new_position, point_1.y))
         return piece
 
+    # setting position of piece on game board
     def set_game_piece(self, piece_type, horizontal_location=None):
         piece = Piece(PieceType[piece_type])
         if horizontal_location:
@@ -44,6 +46,7 @@ class Game:
     def set_game_piece_move(self, game_piece):
         self._game_move = Move(game_piece, self._board_left_up, self._board_left_down, self._board_right_up, self._board_right_down)
 
+    # game play starts using start play method
     def start_play(self, move_type):
         if self._game_move.move_piece(move_type):
             piece = self._game_move.get_piece()
@@ -68,6 +71,7 @@ class Game:
                 print('*', end="")
             print()
 
+    # game play ends by checking condition
     def end_play(self):
         piece = self._game_move.get_piece()
         if piece.point_1.y == self._board_left_down.y:
@@ -81,6 +85,7 @@ class Game:
         return False
 
 
+# Unit test cases for updating new position of randomly positioned second piece
 def test_update_new_position():
     test_game = Game(12, 12)
     test_piece = test_game.update_new_position(Piece(PieceType.piece_1), 7)
@@ -94,7 +99,7 @@ def test_update_new_position():
 if __name__ == "__main__":
     game = Game(12, 12)
     random_piece_type = randint(1, 5)
-    print('Piece number %d is Selected ... for this Game ........\n' % random_piece_type)
+    print('Piece number %d is randomly Selected ... for this Game ........\n' % random_piece_type)
     piece_type_input = 'piece_' + str(random_piece_type)
     game.set_game_piece(piece_type_input)
     first_piece = game.get_game_piece()
@@ -109,7 +114,7 @@ if __name__ == "__main__":
         try:
             game.start_play(MoveType[move_type_input])
         except:
-            print('Please Select a valid move between a, d, w, s or space ......\n')
+            print("Please Select a valid move between a, d, w, s or space ... Don't Select any other move......\n")
         if game.end_play():
             break
     print('Game is over for first piece ..............\n')
@@ -129,7 +134,7 @@ if __name__ == "__main__":
         try:
             game.start_play(MoveType[move_type_input])
         except:
-            print('Please Select a valid move between a, d, w, s or space ......\n')
+            print("Please Select a valid move between a, d, w, s or space ... Don't Select any other move......\n")
         if game.end_play():
             break
     print('Game Ends !!! ......')
